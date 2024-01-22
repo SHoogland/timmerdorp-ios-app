@@ -52,10 +52,13 @@ platform :ios do
       profile: @profiles[0],
     )
 
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
+
     build_app(scheme: "timmerdorp")
 
     upload_to_testflight(
-      api_key: api_key
+      api_key: api_key,
+      notify_external_testers: false,
     )
     
   end
