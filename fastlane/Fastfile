@@ -7,7 +7,7 @@ platform :ios do
     api_key = app_store_connect_api_key(
       key_id: "B2N964AU3P",
       issuer_id: "d1b9b805-0e05-4810-963b-c213ee353573",
-      key_filepath: "./AuthKey_B2N964AU3P.p8",
+      key_filepath: "./AuthKey.p8",
       duration: 1200, # optional (maximum 1200)
     )
 

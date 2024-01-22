@@ -32,7 +32,7 @@ jobs:
           PARSE_JS_KEY: ${{ secrets.PARSE_JS_KEY }}
 
       - name: Appstore connect key from env
-        run: echo $APPSTORE_CONNECT_KEY | base64 --decode > ./AuthKey_B2N964AU3P.p8
+        run: echo $APPSTORE_CONNECT_KEY | base64 --decode > ./AuthKey.p8
         env:
           APPSTORE_CONNECT_KEY: ${{ secrets.APPSTORE_CONNECT_KEY }}
 
