@@ -13,34 +13,36 @@ struct ContentView: View {
 //    @Environment(\.modelContext) private var modelContext
 //    @Query private var items: [Item]
 
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     @State private var isLoginSuccessful = false
 
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Username", text: $username)
+                TextField("Email", text: $email)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .autocapitalization(.none)
+                    .textContentType(.emailAddress)
                 
                 SecureField("Password", text: $password)
                     .padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+                    .textContentType(.password)    
+
                 Button("Login") {
                     // Handle login logic here
-                    // You can check the username and password entered by the user
+                    // You can check the email and password entered by the user
                     // against your authentication system or any other logic.
                     
                     // Example:
-                    if isValidCredentials(username: username, password: password) {
+                    if isValidCredentials(email: email, password: password) {
                         // Successful login
                         print("Login attempted!")
                     } else {
                         // Failed login
-                        print("Invalid username or password")
+                        print("Invalid email or password")
                     }
                 }
                 .padding()
@@ -55,9 +57,9 @@ struct ContentView: View {
         }
     }
 
-    func isValidCredentials(username: String, password: String) -> Bool {
+    func isValidCredentials(email: String, password: String) -> Bool {
         
-        if(username.isEmpty || password.isEmpty){
+        if(email.isEmpty || password.isEmpty){
             return false
         }
         
@@ -71,7 +73,7 @@ struct ContentView: View {
         guard let ParseJsKey: String = infoDictionary["ParseJsKey"] as? String else { return false }
         
         let jsonBody: [String: Any] = [
-            "username": username,
+            "username": email,
             "password": password
         ]
 
