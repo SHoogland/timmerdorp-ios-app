@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A8EE1842B5F1AA9003E811C /* ParseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8EE1832B5F1AA8003E811C /* ParseApi.swift */; };
 		3AB0F2952B5D214000EE5720 /* timmerdorpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0F2942B5D214000EE5720 /* timmerdorpApp.swift */; };
 		3AB0F2972B5D214000EE5720 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0F2962B5D214000EE5720 /* ContentView.swift */; };
 		3AB0F2992B5D214000EE5720 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0F2982B5D214000EE5720 /* Item.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A8EE1832B5F1AA8003E811C /* ParseApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseApi.swift; sourceTree = "<group>"; };
 		3AB0F2912B5D214000EE5720 /* timmerdorp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timmerdorp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AB0F2942B5D214000EE5720 /* timmerdorpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timmerdorpApp.swift; sourceTree = "<group>"; };
 		3AB0F2962B5D214000EE5720 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		3AB0F2932B5D214000EE5720 /* timmerdorp */ = {
 			isa = PBXGroup;
 			children = (
+				3A8EE1832B5F1AA8003E811C /* ParseApi.swift */,
 				3AB0F2942B5D214000EE5720 /* timmerdorpApp.swift */,
 				3AB0F2962B5D214000EE5720 /* ContentView.swift */,
 				3AB0F2982B5D214000EE5720 /* Item.swift */,
@@ -270,6 +273,7 @@
 			files = (
 				3AB0F2972B5D214000EE5720 /* ContentView.swift in Sources */,
 				3AB0F2992B5D214000EE5720 /* Item.swift in Sources */,
+				3A8EE1842B5F1AA9003E811C /* ParseApi.swift in Sources */,
 				3AB0F2952B5D214000EE5720 /* timmerdorpApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

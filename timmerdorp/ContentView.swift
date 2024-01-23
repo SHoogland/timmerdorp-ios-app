@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var isLoginSuccessful = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     var body: some View {
         NavigationView {
@@ -31,110 +33,29 @@ struct ContentView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .textContentType(.password)    
 
-                Button("Login") {
-                    // Handle login logic here
-                    // You can check the email and password entered by the user
-                    // against your authentication system or any other logic.
-                    
-                    // Example:
-                    if isValidCredentials(email: email, password: password) {
-                        // Successful login
-                        print("Login attempted!")
-                    } else {
-                        // Failed login
-                        print("Invalid email or password")
+                    Button("Login") {
+                        ParseApi.shared.isValidCredentials(email: email, password: password) { isValid in
+                            if isValid {
+                                print("Valid credentials")
+                                alertMessage = "Valid credentials"
+                            } else {
+                                print("Invalid credentials")
+                                alertMessage = "Invalid credentials"
+                            }
+                            showAlert = true
+                        }
                     }
-                }
-                .padding()
-                
-                NavigationLink(destination: WelcomeView(), isActive: $isLoginSuccessful) {
-                    EmptyView()
-                }
+                    .padding()
                 
             }
             .padding()
             .navigationTitle("Timmerdorp")
-        }
-    }
-
-    func isValidCredentials(email: String, password: String) -> Bool {
-        
-        if(email.isEmpty || password.isEmpty){
-            return false
-        }
-        
-        guard let url = URL(string: "https://api.timmerdorp.com/1/login") else {
-            print("Invalid URL")
-            return false
-        }
-
-        guard let infoDictionary: [String: Any] = Bundle.main.infoDictionary else { return false }
-        guard let ParseAppId: String = infoDictionary["ParseAppId"] as? String else { return false }
-        guard let ParseJsKey: String = infoDictionary["ParseJsKey"] as? String else { return false }
-        
-        let jsonBody: [String: Any] = [
-            "username": email,
-            "password": password
-        ]
-
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonBody)
-
-            // Create the request
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            // Add any additional headers if needed
-            
-            request.setValue(ParseAppId, forHTTPHeaderField: "X-Parse-Application-Id")
-            request.setValue(ParseJsKey, forHTTPHeaderField: "X-Parse-Javascript-Key")
-            request.setValue("1", forHTTPHeaderField: "X-Parse-Revocable-Session")
-
-            // Attach the JSON data to the request body
-            request.httpBody = jsonData
-
-            // Make the request using URLSession
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                // Check for errors
-                if let error = error {
-                    print("Error: \(error.localizedDescription)")
-                    return
-                }
-
-                // Check if a response was received
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    print("No HTTP response")
-                    return
-                }
-
-                // Check the status code in the response
-                if httpResponse.statusCode == 200 {
-                    // Successful request, handle the response data
-                    if let responseData = data {
-                        // Process the responseData as needed
-                        isLoginSuccessful = true
-
-                        print("Response Data: \(String(data: responseData, encoding: .utf8) ?? "")")
-                    } else {
-                        print("No response data")
-                    }
-                } else {
-                    // Handle other status codes (e.g., error responses)
-                    print("HTTP Status Code: \(httpResponse.statusCode)")
-                }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Login Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
             }
-
-            // Start the URLSession task
-            task.resume()
-            
-            return true
-        } catch {
-            // Handle JSON serialization error
-            print("JSON Serialization Error: \(error.localizedDescription)")
-            return false
         }
-        
     }
+
 // template ios
 //    var body: some View {
 //        NavigationSplitView {

@@ -8,5 +8,5 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-APPLICATION_ID = "parse_app_id"
-JS_KEY = "parse_js_key"
+APPLICATION_ID = parse_app_id
+JS_KEY = parse_js_key
